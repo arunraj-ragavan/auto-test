@@ -4,6 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "cypress": "npx cypress open",
+    "record-test": "cypress run --record --key 0f03f119-19e2-4a07-a642-e481e8e4883c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Arunraj",
