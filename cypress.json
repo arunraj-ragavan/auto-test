@@ -4,10 +4,10 @@
   "mainSteps": [
    {
       "action": "aws:runDocument",
-      "name": "hostname-elastic-update",
+      "name": "AWS-RunShellScript",
       "inputs": {
         "documentType": "SSMDocument",
-        "documentPath": "hostname-elastic-update",
+        "documentPath": "AWS-RunShellScript",
         "documentParameters": "{}"
       }
     }
