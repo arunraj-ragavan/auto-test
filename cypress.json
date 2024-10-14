@@ -4,10 +4,10 @@
   "mainSteps": [
    {
       "action": "aws:runDocument",
-      "name": "AWS-RunShellScript",
+      "name": "Copy-AWS-RunShellScript",
       "inputs": {
         "documentType": "SSMDocument",
-        "documentPath": "AWS-RunShellScript",
+        "documentPath": "Copy-AWS-RunShellScript",
         "documentParameters": "{}"
       }
     }
