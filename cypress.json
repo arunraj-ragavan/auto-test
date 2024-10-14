@@ -3,7 +3,7 @@
   "description": "Execute composite or nested Systems Manager documents (SSM documents) stored in a remote location. The following remote locations are currently supported: GitHub (public and private), Amazon S3 (S3), and Systems Manager documents. The following SSM document types are currently supported: JSON and YAML.",
   "parameters": {
     "sourceType": {
-      "description": "(Required) Specify the source type.",
+      "description": "GitHub",
       "type": "String",
       "allowedValues": [
         "GitHub",
