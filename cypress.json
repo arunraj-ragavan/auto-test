@@ -7,7 +7,7 @@
       "name": "hostname-elastic-update",
       "inputs": {
         "documentType": "SSMDocument",
-        "documentPath": "hostname-elastic-update2",
+        "documentPath": "hostname-elastic-update",
         "documentParameters": "{}"
       }
     }
