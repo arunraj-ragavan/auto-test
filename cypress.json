@@ -6,10 +6,7 @@
       "type": "StringList",
       "description": "echo hi",
       "default": [
-            "#!/bin/bash    ",
-            "# Fetch the authentication token valid for the next 6 hours",
-            "TOKEN=`curl -X PUT \"http://169.254.169.254/latest/api/token\" -H \"X-aws-ec2-metadata-token-ttl-seconds: 21600\"`",
-            ""
+            "#!/bin/bash    "
           ]
     }
   },
