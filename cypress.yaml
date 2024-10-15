@@ -15,7 +15,8 @@
       "inputs": {
         "timeoutSeconds": "60",
         "runCommand": [
-          "echo hi"
+          "echo hi",
+          "echo hello"
         ]
       }
     }
