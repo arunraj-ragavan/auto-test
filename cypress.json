@@ -3,7 +3,7 @@
   "description": "aws:runShellScript",
   "parameters": {
     "commands": {
-      "type": "String",
+      "type": "StringList",
       "description": "echo hi",
       "default": [
             "#!/bin/bash    ",
