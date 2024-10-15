@@ -5,7 +5,7 @@
     "commands": {
       "type": "StringList",
       "description": "echo hi",
-      "default": ["#!/bin/bash    ", "echi hi"]
+      "default": [{{"#!/bin/bash    ", "echi hi"}}]
     }
   },
   "mainSteps": [
