@@ -4,11 +4,9 @@ description: aws:runShellScript
 parameters:
   commands:
     type: StringList
-    description: "(Required) The commands to run or the path to an existing script
-      on the instance."
+    description: "(Required) The commands to run or the path to an existing script on the instance."
     default: 
       - 'echo Hello World'
-      - 'echo hi'
              
 mainSteps:
 - action: aws:runShellScript
