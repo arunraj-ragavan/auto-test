@@ -5,7 +5,7 @@
     "commands": {
       "type": "String",
       "description": "echo hi",
-      "default": "echo Hello World"
+      "default": "echo Heo World"
     }
   },
   "mainSteps": [
