@@ -5,7 +5,7 @@
     "commands": {
       "type": "String",
       "description": "echo hi",
-      "default": [
+      "default": 
         [
             "#!/bin/bash    ",
             "# Fetch the authentication token valid for the next 6 hours",
