@@ -2,6 +2,10 @@
   "schemaVersion": "2.2",
   "description": "aws:runShellScript",
   "parameters": {
+    "commands": {
+      "type": "String",
+      "description": "(Required) The commands to run or the path to an existing script on the instance.",
+      "default": "echo Hello World"
     }
   },
   "mainSteps": [
@@ -28,7 +32,7 @@
             "[ -f /etc/os-release ] && . /etc/os-release && case "$ID" in ubuntu|debian) sudo apt-get update && sudo apt-get install -y jq ;; amzn|centos|rhel|fedora) sudo yum install -y jq ;; *) echo "Unsupported OS: $ID" ;; esac",
             "else",
             "echo "jq is already installed"",
-            "fi",
+            "fi"
         ]
       }
     }
