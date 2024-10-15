@@ -2,10 +2,6 @@
   "schemaVersion": "2.2",
   "description": "aws:runShellScript",
   "parameters": {
-    "commands": {
-      "type": "StringList",
-      "description": "(Required) The commands to run or the path to an existing script on the instance.",
-      "default": "echo Hello World, \techo hi"
     }
   },
   "mainSteps": [
@@ -15,8 +11,24 @@
       "inputs": {
         "timeoutSeconds": "60",
         "runCommand": [
-          "echo hi",
-          "echo hello"
+            "#!/bin/bash    ",
+            "# Fetch the authentication token valid for the next 6 hours",
+            "TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`",
+            "# Get the instance ID from the instance metadata",
+            "instance_id=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/instance-id)",
+            "# Get the instance private ip from the instance metadata",
+            "instance_privateip=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/local-ipv4)",
+            "# Get the region from the instance metadata",
+            "region=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/region)",
+            "# Fetch the name tag using the ICSM API and store the response in a variable",
+            "response=$(curl -X GET "https://icsm.isha.in/resource_admin/resource/instance/0duQVs4ArtPmMbyLZMvW457wgPCAhSZ7YWfHtaWU?instance_id=$instance_id&region=$region")",
+            "JQ_VERSION=$(jq --version)",
+            "if [ -z "$JQ_VERSION" ]; then",
+            "# Install jq based on the OS",
+            "[ -f /etc/os-release ] && . /etc/os-release && case "$ID" in ubuntu|debian) sudo apt-get update && sudo apt-get install -y jq ;; amzn|centos|rhel|fedora) sudo yum install -y jq ;; *) echo "Unsupported OS: $ID" ;; esac",
+            "else",
+            "echo "jq is already installed"",
+            "fi",
         ]
       }
     }
