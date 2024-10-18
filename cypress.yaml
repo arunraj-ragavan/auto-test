@@ -33,54 +33,47 @@
             "else",
             "echo \"jq is already installed\"",
             "fi",
-            # Extract the instance_name from the JSON response, trimming whitespace, appending private ip
-            instance_name=$(echo \"$response\" | jq -r '.instance_name' | xargs)-$instance_privateip
-            
-            # Debugging output to see the fetched instance name
-            echo \"Fetched instance name: '$instance_name'\"
-            
-            #Checking Elastic service status
-            ELASTIC_STATUS=\"$(systemctl is-enabled elastic-agent.service)\"
-            
-             # Getting architecture of the server
-            ARCH=\"$(arch)\"
-            
-            #Installing Elastic-Agent
-            if [ \"$ELASTIC_STATUS\" != \"enabled\" ]; then
-            	if [ \"$ARCH\" == \"x86_64\" ]; then
-            		echo \"Elastic agent is not installed. Installing now ... (X64)\"
-            		curl -L -O https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-8.13.3-linux-x86_64.tar.gz
-            		tar xzf elastic-agent-8.13.3-linux-x86_64.tar.gz
-            		cd elastic-agent-8.13.3-linux-x86_64
-            		sudo ./elastic-agent install --force --url=https://651856dec6c94bd1bbb042c4907c0867.fleet.ap-south-1.aws.elastic-cloud.com:443 --enrollment-token=WEFFaEw0OEJNanNLZTZmMFk3Mnc6ZUFYa1hycmdSaHk5enpWdWI0S3J1dw== --tag=poc
-            	elif [ \"$ARCH\" != \"x86_64\" ]; then		
-            		echo \"Elastic agent is not installed. Installing now ... (arm64)\"
-            		curl -L -O https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-8.13.3-linux-arm64.tar.gz
-            		tar xzf elastic-agent-8.13.3-linux-arm64.tar.gz
-            		cd elastic-agent-8.13.3-linux-arm64
-            		sudo ./elastic-agent install --force --url=https://651856dec6c94bd1bbb042c4907c0867.fleet.ap-south-1.aws.elastic-cloud.com:443 --enrollment-token=WEFFaEw0OEJNanNLZTZmMFk3Mnc6ZUFYa1hycmdSaHk5enpWdWI0S3J1dw== --tag=poc
-            	fi
-            elif [ \"$ELASTIC_STATUS\" == \"enabled\" ]; then
-            	echo \"Elastic agent is already installed.\"
-            fi
-            	
-            #Checking old host name
-            OLD_HOST_NAME=$(hostname)
-            
-            # Hostname update & Elastic restart
-            if [ \"$instance_name\" != \"name not defined\" ]; then
-            
-               if [ \"$OLD_HOST_NAME\" != \"$instance_name\" ]; then
-            	echo \"Updating hostname to $instance_name\"
-                	sudo hostnamectl set-hostname \"$instance_name\"
-                	sudo service elastic-agent restart
-                	echo \"Hostname is updated & restarted Elastic service.\"
-               else
-                	echo \"Instance name is same as Hostname and so skipping hostname update.\"
-               fi
-            else
-            	echo \"Instance name is 'name not defined', skipping hostname update.\"
-            fi
+            "# Extract the instance_name from the JSON response, trimming whitespace, appending private ip",
+            "instance_name=$(echo \"$response\" | jq -r '.instance_name' | xargs)-$instance_privateip",
+            "# Debugging output to see the fetched instance name",
+            "echo \"Fetched instance name: '$instance_name'\"",
+            "#Checking Elastic service status",
+            "ELASTIC_STATUS=\"$(systemctl is-enabled elastic-agent.service)\"",
+            "# Getting architecture of the server",
+            "ARCH=\"$(arch)\"",
+            "#Installing Elastic-Agent",
+            "if [ \"$ELASTIC_STATUS\" != \"enabled\" ]; then",
+            "if [ \"$ARCH\" == \"x86_64\" ]; then",
+            "echo \"Elastic agent is not installed. Installing now ... (X64)\"",
+            "curl -L -O https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-8.13.3-linux-x86_64.tar.gz",
+            "tar xzf elastic-agent-8.13.3-linux-x86_64.tar.gz",
+            "cd elastic-agent-8.13.3-linux-x86_64",
+            "sudo ./elastic-agent install --force --url=https://651856dec6c94bd1bbb042c4907c0867.fleet.ap-south-1.aws.elastic-cloud.com:443 --enrollment-token=WEFFaEw0OEJNanNLZTZmMFk3Mnc6ZUFYa1hycmdSaHk5enpWdWI0S3J1dw==",
+            "elif [ \"$ARCH\" != \"x86_64\" ]; then",
+            "echo \"Elastic agent is not installed. Installing now ... (arm64)\"",
+            "curl -L -O https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-8.13.3-linux-arm64.tar.gz",
+            "tar xzf elastic-agent-8.13.3-linux-arm64.tar.gz",
+            "		cd elastic-agent-8.13.3-linux-arm64",
+            "		sudo ./elastic-agent install --force --url=https://651856dec6c94bd1bbb042c4907c0867.fleet.ap-south-1.aws.elastic-cloud.com:443 --enrollment-token=WEFFaEw0OEJNanNLZTZmMFk3Mnc6ZUFYa1hycmdSaHk5enpWdWI0S3J1dw==",
+            "	fi",
+            "elif [ \"$ELASTIC_STATUS\" == \"enabled\" ]; then",
+            " 	echo \"Elastic agent is already installed.\"",
+            "fi",
+            "#Checking old host name",
+            "OLD_HOST_NAME=$(hostname)",
+            "# Hostname update & Elastic restart",
+            "if [ \"$instance_name\" != \"name not defined\" ]; then",
+            "   if [ \"$OLD_HOST_NAME\" != \"$instance_name\" ]; then",
+            "	    echo \"Updating hostname to $instance_name\"",
+            "    	sudo hostnamectl set-hostname \"$instance_name\"",
+            "    	sudo service elastic-agent restart",
+            "    	echo \"Hostname is updated & restarted Elastic service.\"",
+            "   else",
+            "    	echo \"Instance name is same as Hostname and so skipping hostname update.\"",
+            "   fi",
+            "else",
+            "	echo \"Instance name is 'name not defined', skipping hostname update.\"",
+            "fi"
         ]
       }
     }
