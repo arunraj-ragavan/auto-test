@@ -57,7 +57,7 @@
             "		 sudo ./elastic-agent install --force --url=https://651856dec6c94bd1bbb042c4907c0867.fleet.ap-south-1.aws.elastic-cloud.com:443 --enrollment-token=WEFFaEw0OEJNanNLZTZmMFk3Mnc6ZUFYa1hycmdSaHk5enpWdWI0S3J1dw==",
             "	fi",
             "elif [ \"$ELASTIC_STATUS\" == \"enabled\" ]; then",
-            " 	echo \"Elastic agent is already installed.\"",
+            "  echo \"Elastic agent is already installed.\"",
             "fi",
             "#Checking old host name",
             "OLD_HOST_NAME=$(hostname)",
